@@ -1,0 +1,17 @@
+{
+  "testing": {
+    "fileOpen": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "fileOpen",
+          "mime_prefix": ""
+        }
+      },
+      "data": {
+        "text/plain": "<IPython.core.display.Video object>",
+        "text/html": "<video src=\"file_open.mp4\" controls  width=\"512\"  height=\"512\">\n      Your browser does not support the <code>video</code> element.\n    </video>"
+      }
+    }
+  }
+}
