@@ -143,11 +143,14 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/napari beginner-tab.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+        <a class="dropdown-buttons"
+            href="_sources/napari beginner-tab.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/napari beginner-tab.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -214,18 +217,33 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-napari">
+   Install napari
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-image">
    Load image
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#get-image-dimension">
-   Get image dimension
+  <a class="reference internal nav-link" href="#install-plugins">
+   Install plugins
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-image-info">
+   Get image info
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#adjust-image-display">
    Adjust image display
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#file-saving">
+   File saving
   </a>
  </li>
 </ul>
@@ -246,12 +264,27 @@
 <p>This tutorial uses napari 0.4.12. <br></p>
 <p>Showcase how to access napari functions from Python code and from GUI</p>
 </div>
+<div class="section" id="install-napari">
+<h2>Install napari<a class="headerlink" href="#install-napari" title="Permalink to this headline">¶</a></h2>
+<div class="tabbed-set docutils">
+<input checked="checked" id="7b58765e-3a8f-4550-9f18-1f62467a8d57" name="631412f1-caee-45b4-808e-8945c5c6148f" type="radio">
+</input><label class="tabbed-label" for="7b58765e-3a8f-4550-9f18-1f62467a8d57">
+napari in code</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">napari</span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<input id="e25994eb-7cc0-4f7b-80b2-24c5ee54a268" name="631412f1-caee-45b4-808e-8945c5c6148f" type="radio">
+</input><label class="tabbed-label" for="e25994eb-7cc0-4f7b-80b2-24c5ee54a268">
+napari in GUI</label><div class="tabbed-content docutils">
+<p>double click link</p>
+</div>
+</div>
+</div>
 <div class="section" id="load-image">
 <h2>Load image<a class="headerlink" href="#load-image" title="Permalink to this headline">¶</a></h2>
 <p>napari natively supports tiff (and other formats supported by skimage.io.imread) as input image file format.<br>
 Additional input file formats may be supported by plugins.<br></p>
-<p><font color=blue> GUI has several file open options (drag and drop, File &gt; Open File) <br></font>
-<font color=red>link: supported file format and plugins</font></p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">napari</span>
@@ -265,8 +298,8 @@ Additional input file formats may be supported by plugins.<br></p>
 </div>
 </div>
 <div class="tabbed-set docutils">
-<input checked="checked" id="6d1e54cd-7f36-4a70-9ba5-022bcbfcf3c4" name="6f6977c6-905a-4013-a8ea-9b789bfb6983" type="radio">
-</input><label class="tabbed-label" for="6d1e54cd-7f36-4a70-9ba5-022bcbfcf3c4">
+<input checked="checked" id="6638a4c9-9dea-4b20-b8d6-c0e12c03b24b" name="421b5ec7-6fa2-46e1-960f-b11899635ee8" type="radio">
+</input><label class="tabbed-label" for="6638a4c9-9dea-4b20-b8d6-c0e12c03b24b">
 napari in code</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">napari</span>
 <span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
@@ -277,119 +310,45 @@ napari in code</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="3d0dcf18-86fd-459b-ac40-803d4d182221" name="6f6977c6-905a-4013-a8ea-9b789bfb6983" type="radio">
-</input><label class="tabbed-label" for="3d0dcf18-86fd-459b-ac40-803d4d182221">
+<input id="6c88d303-97e8-4307-8924-2273c129aa7e" name="421b5ec7-6fa2-46e1-960f-b11899635ee8" type="radio">
+</input><label class="tabbed-label" for="6c88d303-97e8-4307-8924-2273c129aa7e">
 napari in GUI gif</label><div class="tabbed-content docutils">
 <p><img alt="SegmentLocal" src="_images/file_open.gif" /></p>
 </div>
 </div>
 </div>
-<div class="section" id="get-image-dimension">
-<h2>Get image dimension<a class="headerlink" href="#get-image-dimension" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-plugins">
+<h2>Install plugins<a class="headerlink" href="#install-plugins" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.napari-hub.org/">napari hub</a> lets users browse existing napari plugins. Most plugins can be installed either via pip install, or from napari viewer.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="a68748a4-eb8d-4a89-bf05-d21552e9f2b7" name="8b8b73ca-1212-44e7-b68d-046981cf14f3" type="radio">
+</input><label class="tabbed-label" for="a68748a4-eb8d-4a89-bf05-d21552e9f2b7">
+pip install</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">NicePlugin</span>
+</pre></div>
+</div>
+</div>
+<input id="2f24b270-db9a-4dcd-98e7-878e075811f9" name="8b8b73ca-1212-44e7-b68d-046981cf14f3" type="radio">
+</input><label class="tabbed-label" for="2f24b270-db9a-4dcd-98e7-878e075811f9">
+napari viewer plugin install</label><div class="tabbed-content docutils">
+<p>place holder for plugin install gif</p>
+</div>
+</div>
+</div>
+<div class="section" id="get-image-info">
+<h2>Get image info<a class="headerlink" href="#get-image-info" title="Permalink to this headline">¶</a></h2>
+<p>Image dimension <br>
+voxel size and time interval <br></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;image dimension in (z,y,x):&quot;</span><span class="p">,</span> <span class="n">viewer</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;nuclei&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;image voxel size for (z,y,x):&quot;</span><span class="p">,</span> <span class="n">viewer</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;nuclei&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR:tornado.general:Uncaught exception in ZMQStream callback
-Traceback (most recent call last):
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 431, in _run_callback
-    callback(*args, **kwargs)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/jupyter_client/threaded.py&quot;, line 121, in _handle_recv
-    msg_list = self.ioloop._asyncio_event_loop.run_until_complete(get_msg(future_msg))
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 592, in run_until_complete
-    self._check_running()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 554, in _check_running
-    raise RuntimeError(
-RuntimeError: Cannot run the event loop while another loop is running
-ERROR:tornado.general:Uncaught exception in zmqstream callback
-Traceback (most recent call last):
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 452, in _handle_events
-    self._handle_recv()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 481, in _handle_recv
-    self._run_callback(callback, msg)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 431, in _run_callback
-    callback(*args, **kwargs)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/jupyter_client/threaded.py&quot;, line 121, in _handle_recv
-    msg_list = self.ioloop._asyncio_event_loop.run_until_complete(get_msg(future_msg))
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 592, in run_until_complete
-    self._check_running()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 554, in _check_running
-    raise RuntimeError(
-RuntimeError: Cannot run the event loop while another loop is running
-Exception in callback BaseAsyncIOLoop._handle_events(121, 1)
-handle: &lt;Handle BaseAsyncIOLoop._handle_events(121, 1)&gt;
-Traceback (most recent call last):
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/events.py&quot;, line 81, in _run
-    self._context.run(self._callback, *self._args)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/tornado/platform/asyncio.py&quot;, line 189, in _handle_events
-    handler_func(fileobj, events)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 452, in _handle_events
-    self._handle_recv()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 481, in _handle_recv
-    self._run_callback(callback, msg)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 431, in _run_callback
-    callback(*args, **kwargs)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/jupyter_client/threaded.py&quot;, line 121, in _handle_recv
-    msg_list = self.ioloop._asyncio_event_loop.run_until_complete(get_msg(future_msg))
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 592, in run_until_complete
-    self._check_running()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 554, in _check_running
-    raise RuntimeError(
-RuntimeError: Cannot run the event loop while another loop is running
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>image dimension in (z,y,x): (60, 256, 256)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR:tornado.general:Uncaught exception in ZMQStream callback
-Traceback (most recent call last):
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 431, in _run_callback
-    callback(*args, **kwargs)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/jupyter_client/threaded.py&quot;, line 121, in _handle_recv
-    msg_list = self.ioloop._asyncio_event_loop.run_until_complete(get_msg(future_msg))
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 592, in run_until_complete
-    self._check_running()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 554, in _check_running
-    raise RuntimeError(
-RuntimeError: Cannot run the event loop while another loop is running
-ERROR:tornado.general:Uncaught exception in zmqstream callback
-Traceback (most recent call last):
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 452, in _handle_events
-    self._handle_recv()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 481, in _handle_recv
-    self._run_callback(callback, msg)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 431, in _run_callback
-    callback(*args, **kwargs)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/jupyter_client/threaded.py&quot;, line 121, in _handle_recv
-    msg_list = self.ioloop._asyncio_event_loop.run_until_complete(get_msg(future_msg))
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 592, in run_until_complete
-    self._check_running()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 554, in _check_running
-    raise RuntimeError(
-RuntimeError: Cannot run the event loop while another loop is running
-Exception in callback BaseAsyncIOLoop._handle_events(158, 1)
-handle: &lt;Handle BaseAsyncIOLoop._handle_events(158, 1)&gt;
-Traceback (most recent call last):
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/events.py&quot;, line 81, in _run
-    self._context.run(self._callback, *self._args)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/tornado/platform/asyncio.py&quot;, line 189, in _handle_events
-    handler_func(fileobj, events)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 452, in _handle_events
-    self._handle_recv()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 481, in _handle_recv
-    self._run_callback(callback, msg)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/zmq/eventloop/zmqstream.py&quot;, line 431, in _run_callback
-    callback(*args, **kwargs)
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/site-packages/jupyter_client/threaded.py&quot;, line 121, in _handle_recv
-    msg_list = self.ioloop._asyncio_event_loop.run_until_complete(get_msg(future_msg))
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 592, in run_until_complete
-    self._check_running()
-  File &quot;/opt/anaconda3/envs/napari-env/lib/python3.8/asyncio/base_events.py&quot;, line 554, in _check_running
-    raise RuntimeError(
-RuntimeError: Cannot run the event loop while another loop is running
+image voxel size for (z,y,x): [1. 1. 1.]
 </pre></div>
 </div>
 </div>
@@ -400,8 +359,8 @@ RuntimeError: Cannot run the event loop while another loop is running
 <p>Both API and GUI have flexible image display control.<br></p>
 <p>For other display options, see <a class="reference external" href="https://napari.org/api/stable/napari.layers.Image.html">napari image layer API</a>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="e8b82b99-a1d4-44eb-893f-79c3b108b9dc" name="a8a89f00-e080-4ed6-a516-e371dfeac120" type="radio">
-</input><label class="tabbed-label" for="e8b82b99-a1d4-44eb-893f-79c3b108b9dc">
+<input checked="checked" id="df5673a1-e51c-4ecd-bc28-52b8fb906c8c" name="6141b36f-cc22-439f-8892-0fef291f8598" type="radio">
+</input><label class="tabbed-label" for="df5673a1-e51c-4ecd-bc28-52b8fb906c8c">
 napari in code</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#change nuclei color to magenta</span>
 <span class="n">viewer</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;nuclei&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">colormap</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
@@ -409,10 +368,29 @@ napari in code</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="30779c66-9052-475c-b8fc-e5c4ddea38fd" name="a8a89f00-e080-4ed6-a516-e371dfeac120" type="radio">
-</input><label class="tabbed-label" for="30779c66-9052-475c-b8fc-e5c4ddea38fd">
+<input id="80fdfc86-0518-4bd4-9d06-e7ae624d87b0" name="6141b36f-cc22-439f-8892-0fef291f8598" type="radio">
+</input><label class="tabbed-label" for="80fdfc86-0518-4bd4-9d06-e7ae624d87b0">
 napari in GUI gif</label><div class="tabbed-content docutils">
 <p><img alt="SegmentLocal" src="_images/colormap.gif" /></p>
+</div>
+</div>
+</div>
+<div class="section" id="file-saving">
+<h2>File saving<a class="headerlink" href="#file-saving" title="Permalink to this headline">¶</a></h2>
+<p>Default or recommended file formats for each layer type:
+???</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="65229ebb-790e-497c-8146-b24b762b00f0" name="dbfb617f-11ef-4af6-94bc-00421a8b5365" type="radio">
+</input><label class="tabbed-label" for="65229ebb-790e-497c-8146-b24b762b00f0">
+napari in code</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">napari</span><span class="o">.</span><span class="n">save_layers</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="136e6257-5a3b-42bc-ae2b-822ff0acadcd" name="dbfb617f-11ef-4af6-94bc-00421a8b5365" type="radio">
+</input><label class="tabbed-label" for="136e6257-5a3b-42bc-ae2b-822ff0acadcd">
+napari in GUI gif</label><div class="tabbed-content docutils">
+<p>place holder for file saving gif</p>
 </div>
 </div>
 <div class="cell tag_hide-cell docutils container">

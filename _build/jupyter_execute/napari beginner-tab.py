@@ -9,12 +9,23 @@
 # 
 # Showcase how to access napari functions from Python code and from GUI
 
+# ## Install napari
+# 
+# ````{tabbed} napari in code
+# 
+# ```python
+# pip install napari[all]
+# ```
+# 
+# ````
+# 
+# ````{tabbed} napari in GUI
+# double click link
+# ````
+
 # ## Load image
 # napari natively supports tiff (and other formats supported by skimage.io.imread) as input image file format.<br>
 # Additional input file formats may be supported by plugins.<br>
-# 
-# <font color=blue> GUI has several file open options (drag and drop, File > Open File) <br></font>
-# <font color=red>link: supported file format and plugins</font>
 
 # In[1]:
 
@@ -44,12 +55,32 @@ viewer.dims.ndisplay = 3
 # ![SegmentLocal](file_open.gif "segment")
 # ````
 
-# ## Get image dimension
+# ## Install plugins
+# 
+# [napari hub](https://www.napari-hub.org/) lets users browse existing napari plugins. Most plugins can be installed either via pip install, or from napari viewer.
+# 
+# ````{tabbed} pip install
+# 
+# ```python
+# pip install NicePlugin
+# ```
+# 
+# ````
+# 
+# ````{tabbed} napari viewer plugin install
+# place holder for plugin install gif
+# ````
+
+# ## Get image info
+# 
+# Image dimension <br>
+# voxel size and time interval <br>
 
 # In[2]:
 
 
 print("image dimension in (z,y,x):", viewer.layers['nuclei'].data.shape)
+print("image voxel size for (z,y,x):", viewer.layers['nuclei'].scale)
 
 
 # ## Adjust image display
@@ -57,7 +88,6 @@ print("image dimension in (z,y,x):", viewer.layers['nuclei'].data.shape)
 # Both API and GUI have flexible image display control.<br>
 # 
 # For other display options, see [napari image layer API](https://napari.org/api/stable/napari.layers.Image.html).
-# 
 
 # ````{tabbed} napari in code
 # 
@@ -71,6 +101,23 @@ print("image dimension in (z,y,x):", viewer.layers['nuclei'].data.shape)
 # 
 # ````{tabbed} napari in GUI gif
 # ![SegmentLocal](colormap.gif "segment")
+# ````
+
+# ## File saving
+# 
+# Default or recommended file formats for each layer type:
+# ???
+# 
+# ````{tabbed} napari in code
+# 
+# ```python
+# napari.save_layers(path, layers)
+# ```
+# 
+# ````
+# 
+# ````{tabbed} napari in GUI gif
+# place holder for file saving gif
 # ````
 
 # In[3]:
